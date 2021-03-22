@@ -1,18 +1,39 @@
-const $ = (element) => {
+const $ = (selector) => {
+  element = document.querySelector(selector)
+  elements = document.querySelectorAll(selector)
+
   element.show = () => {
-    element.style.display = 'inline'
+    elements.forEach(el => {
+      el.style.display = 'inline'
+    })
   }
+
   element.start = () => {
-    element.show()
-    element.play()
+    elements.forEach(el => {
+      element.show()
+      element.play()
+    })
   }
+
   element.stop = () => {
-    element.style.display = 'none'
-    element.pause()
+    elements.forEach(el => {
+      el.style.display = 'none'
+      el.pause()
+    })
   }
+
   element.clear = () => {
-    element.innerHTML = ''
+    elements.forEach(el => {
+      el.innerHTML = ''
+    })
   }
+
+  element.insert = (content) => {
+    elements.forEach(el => {
+      el.innerHTML = content
+    })
+  }
+
   element.videoDuration = element.duration * 1000
 
   return element
@@ -53,8 +74,8 @@ const generateChoices = (choices) => {
 
 const cancelAllAnimations = () => {
   document.getAnimations().forEach(animation => {
-      animation.cancel()
-    }
+    animation.cancel()
+  }
   )
 }
 
@@ -64,15 +85,27 @@ const afterChoiceEvent = (choiceId) => {
   cancelAllAnimations()
   $('.choices-container').clear()
 
-  const video = choiceId === undefined ? 0 : getVideoAfterChoice(choiceId)
-  const delay = getShowChoiceDelay(video)
+  const videoId = choiceId === undefined ? 0 : getVideoAfterChoice(choiceId)
+  if (typeof videoId !== 'string') {
+    $(v(videoId)).start()
 
-  $(v(video)).start()
+    const delay = getShowChoiceDelay(videoId)
 
-  setTimeout(() => {
-    generateChoices(getChoicesAfterVideo(video))
-    timer($(v(video)).videoDuration - delay)
-  }, delay)
+    setTimeout(() => {
+      generateChoices(getChoicesAfterVideo(videoId))
+      timer($(v(videoId)).videoDuration - delay)
+    }, delay)
+  } else {
+    const story = getStory(videoId)
+    const delay = getShowChoiceDelay(videoId)
+    const choices = getChoicesAfterVideo(videoId)
+
+    $('.story').insert(story)
+
+    if (delay) timer(delay)
+    console.log(choices)
+    if (choices) generateChoices(choices)
+  }
 }
 
 

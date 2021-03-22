@@ -1,4 +1,4 @@
-choices = {
+const choices = {
   '0': 'Повчити ІТ',
   '1': 'Піти в зал',
   '2': 'Піти бухати з пацанами',
@@ -10,11 +10,11 @@ choices = {
   '8': 'Зареєструватись',
   '9': 'Не реєстровуватись',
   '10': 'Лишити python',
-  '11': 'Почати жити в кайф',
+  '11': 'Жити в кайф',
   '12': 'Інвестувати'
 }
 
-afterChoices = {
+const afterChoices = {
   '0': 1,
   '1': 2,
   '2': '_1',
@@ -26,67 +26,77 @@ afterChoices = {
   '8': '_3',
   '9': '_1',
   '10': 5,
-  '11': 13,
-  '12': 14
+  '11': '_5',
+  '12': '_6'
 }
 
-afterVideos = {
+const afterVideos = {
   '0': [0, 1, 2],
   '1': [3, 4],
   '2': [5, 6],
   '3': [7, 9],
   '4': [10, 3],
   '5': [8, 9],
-  '6': [12],
-  '7': [10],
+  '6': '_4',
+  '7': '_2',
   '_0': 'END',
   '_1': 'END',
   '_2': 'END',
   '_3': [11, 12],
   '_4': [11, 12],
-  '13': 'END',
-  '14': 'END',
-  '15': 'BACKSTAGE'
+  '_5': '8',
+  '_6': '8',
+  '8': 'BACKSTAGE'
 }
 
-videoShowChoiceDelays = {
-  '0': 4500,
-  '1': 3000,
-  '2': 3000,
-  '3': 3000,
-  '4': 3000,
-  '5': 3000,
-  '6': 3000,
-  '7': 3000,
-  '_0': 3000,
-  '_1': 3000,
-  '_2': 3000,
-  '_3': 3000,
-  '_4': 3000,
-  '13': 3000,
-  '14': 3000,
-  '15': 3000
+const videoShowChoiceDelays = {
+  '0': 1000,
+  '1': 1000,
+  '2': 1000,
+  '3': 1000,
+  '4': 1000,
+  '5': 1000,
+  '6': 1000,
+  '7': 1000,
+  '_3': 10000,
+  '_4': 10000
 }
 
-getChoices = (choices) => {
-  let choicesData = []
-
-  choices.forEach(choice => {
-    choicesData.push({ id: choice, text: choices[choice] })
-  })
-
-  return choicesData
+const getStory = (storyId) => {
+  switch (storyId) {
+    case '_0':
+      return 'Пройшло 3 місяці, мене вигнали з курсу. Я вирішив, шо ІТ це не моє і спився. Кінець (1 з 3 концівок)'
+    case '_1':
+      return 'Я вирішив, шо ІТ це не моє і спився. Кінець (1 з 3 концівок)'
+    case '_2':
+      return 'Подорозі до залу я зустрів своїх друзів, вони вмовили мене піти бухати, через деякий час я вирішив, шо ІТ це не моє і спився. Кінець'
+    case '_3':
+      return 'Через деякий час я з другом влаштувались на роботу і косили великі бабки'
+    case '_4':
+      return 'Подорозі до залу підараси кликали бухати, але навпроти вже йшли друзі, з якими я домовився піти в зал і ми були чітко налаштовані качати свої баночки. В залі ми зустріли Бодника, який дав нам сильну мотивацію вчитись. Через деякий час я з другом влаштувались на роботу і косили великі бабки'
+    case '_5':
+      return 'Я знюхався і спився, після чого мене відпіздив Михайло, за те що я так і не створив ІТ компанію і не влаштував його туди. Я прожив старість самотньо. Кінець (2 з 3 кінцівок)'
+    case '_6':
+      return 'Я став міліардером і в свої 27 років запускаю разом з Маском ракети (тільки моя ракета більша). Кінець (3 з 3 кінцівок)'
+    default:
+      return ''
+  }
 }
 
-getChoicesAfterVideo = (video) => {
-  return getChoices(afterVideos[video])
+const getChoicesAfterVideo = (videoId) => {
+  const choicesIds = afterVideos[videoId]
+
+  if (typeof choicesIds !== 'string') {
+    return choicesIds.map(choiceId => {
+      return { id: choiceId, text: choices[choiceId] }
+    })
+  }
 }
 
-getVideoAfterChoice = (choiceId) => {
-  console.log(choiceId)
+const getVideoAfterChoice = (choiceId) => {
   return afterChoices[choiceId]
 }
 
-getShowChoiceDelay = (video) => {
+const getShowChoiceDelay = (video) => {
   return videoShowChoiceDelays[video]
 }
