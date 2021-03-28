@@ -10,6 +10,22 @@ body, figure {
   background-color: black;
 }
 
+.after-loading {
+  display: none;
+}
+
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  letter-spacing: 1px;
+  font-size: 30px;
+  user-select: none;
+  z-index: 1001;
+}
+
 video {
   display: none;
   position: fixed;
@@ -19,6 +35,7 @@ video {
 }
 
 .main-btn {
+  display: none;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -51,6 +68,7 @@ video {
   line-height: 25px;
   font-size: 20px;
   user-select: none;
+  z-index: 1001;
 }
 
 .shadow {
@@ -107,13 +125,13 @@ video {
   user-select: none;
 }
 
-@media screen and (orientation:portrait)
+@media screen and (orientation: portrait)
 {
   .video-container {
     display: none;
   }
 
   .portrait-mode {
-    display: inlfine;
+    display: inline;
   }
 }

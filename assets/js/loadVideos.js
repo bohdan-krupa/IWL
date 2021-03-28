@@ -11,6 +11,16 @@ let videosData = [
   { name: 'backstage', loaded: 0 }
 ]
 
+
+const createVideoElement = (videoName, blob) => {
+  const video = document.createElement('video')
+  video.src = URL.createObjectURL(blob)
+  video.classList = `video-${videoName}`
+
+  $('.video-container').appendChild(video)
+}
+
+
 const loadVideo = (videoName, videoDataId) => {
   const xhr = new XMLHttpRequest()
   const url = `${HOST}/assets/videos/${videoName}.mp4`
@@ -21,13 +31,13 @@ const loadVideo = (videoName, videoDataId) => {
   xhr.onload = e => {
     const blob = new Blob([e.target.response], { type: 'video/mp4' })
 
-    // video.src = URL.createObjectURL(blob)
+    createVideoElement(videoName, blob)
   }
 
   xhr.onprogress = e => {
     if (e.lengthComputable) {
       videosData[videoDataId].loaded = e.loaded / e.total * 100
-      
+
       updateLoading()
     }
   }
@@ -35,12 +45,14 @@ const loadVideo = (videoName, videoDataId) => {
   xhr.send()
 }
 
-const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length;
 
 const updateLoading = () => {
+  const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length
+
   avgLoading = average(videosData.map(videoData => videoData.loaded))
-  console.log('Loading', avgLoading)
+  $('.loading').innerHTML = Math.round(avgLoading) + '%'
 }
+
 
 videosData.forEach((videoData, index) => {
   loadVideo(videoData.name, index)
