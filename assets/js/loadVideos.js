@@ -50,7 +50,14 @@ const updateLoading = () => {
   const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length
 
   avgLoading = average(videosData.map(videoData => videoData.loaded))
-  $('.loading').innerHTML = Math.round(avgLoading) + '%'
+  avgLoading = avgLoading.toFixed(2)
+
+  $('.loading').innerHTML = avgLoading + '%'
+  
+  if (avgLoading === '100.00') {
+    $('.loading').remove()
+    $('.after-loading').show()
+  }
 }
 
 
