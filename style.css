@@ -35,7 +35,6 @@ video {
 }
 
 .main-btn {
-  /* display: none; */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -87,6 +86,7 @@ video {
   position: fixed;
   width: 100%;
   bottom: 20px;
+  z-index: 1001;
 }
 
 .choice {
@@ -111,6 +111,7 @@ video {
   height: 3px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1001;
 }
 
 .story {

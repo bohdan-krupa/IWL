@@ -2,13 +2,13 @@ let videosData = [
   { name: 'start', loaded: 0 },
   { name: '0', loaded: 0 },
   { name: '1', loaded: 0 },
-  { name: '2', loaded: 0 },
-  { name: '3', loaded: 0 },
-  { name: '4', loaded: 0 },
-  { name: '5', loaded: 0 },
-  { name: '6', loaded: 0 },
-  { name: '7', loaded: 0 },
-  { name: 'backstage', loaded: 0 }
+  // { name: '2', loaded: 0 },
+  // { name: '3', loaded: 0 },
+  // { name: '4', loaded: 0 },
+  // { name: '5', loaded: 0 },
+  // { name: '6', loaded: 0 },
+  // { name: '7', loaded: 0 },
+  // { name: 'backstage', loaded: 0 }
 ]
 
 
@@ -53,7 +53,7 @@ const updateLoading = () => {
   avgLoading = avgLoading.toFixed(2)
 
   $('.loading').innerHTML = avgLoading + '%'
-  
+
   if (avgLoading === '100.00') {
     $('.loading').remove()
     $('.after-loading').show()
