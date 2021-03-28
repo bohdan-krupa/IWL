@@ -6,6 +6,8 @@ document.addEventListener('click', () => {
 })
 
 $('.open-game-btn').addEventListener('click', () => {
+  $('audio').volume = 0.005
+  $('audio').play()
   $('.open-game-btn').remove()
   $('.video-start').start()
   $('.start-game-btn').show()
