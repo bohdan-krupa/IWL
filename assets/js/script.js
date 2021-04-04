@@ -6,7 +6,6 @@ document.addEventListener('click', () => {
 })
 
 $('.open-game-btn').addEventListener('click', () => {
-  // $('audio').volume = 0.005
   $('audio').volume = 0.03
   $('audio').play()
   $('.open-game-btn').remove()
@@ -16,8 +15,20 @@ $('.open-game-btn').addEventListener('click', () => {
 
 $('.start-game-btn').addEventListener('click', () => {
   $('.video-start').stop()
-  $('.start-game-btn').remove()
-  $('.shadow').remove()
+  $('.start-game-btn').hide()
+  $('.shadow').hide()
 
   startGame()
+})
+
+$('.try-again').addEventListener('click', () => {
+  $('.try-again').hide()
+  $('.video-start').start()
+  $('.shadow').show()
+  $('.start-game-btn').show()
+});
+
+startVideosLoading(() => {
+  $('.loading, .while-loading').remove()
+  $('.after-loading').show()
 })

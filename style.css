@@ -5,39 +5,57 @@
   font-family: 'Roboto', sans-serif;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0.06);
   color: white;
+  letter-spacing: 1px;
+  user-select: none;
 }
 
 body, figure {
   background-color: black;
 }
 
-.while-loading * {
-  position: fixed;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  letter-spacing: 1px;
+.while-loading {
+  display: flex;
+  justify-content: center;
   z-index: 1001;
-  user-select: none;
+}
+
+.while-loading > * {
+  position: fixed;
+  transform: translateY(-50%);
+}
+
+.while-loading .click-to-fullscreen,
+.while-loading .turn-sound-on {
+  font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .while-loading .click-to-fullscreen {
-  top: 25%;
-  font-size: 18px;
+  top: 20%;
 }
 
-.loading {
+.while-loading .loading {
   top: 50%;
-  font-size: 30px;
 }
 
 .while-loading .turn-sound-on {
-  top: 75%;
-  font-size: 18px;
+  top: 80%;
+}
+
+.loading {
+  font-size: 30px;
+}
+
+.icon {
+  position: relative;
+  height: 30px;
+  margin: 10px;
 }
 
 .after-loading {
-  display: none;
+  /* display: none; */
 }
 
 video {
@@ -61,7 +79,6 @@ video {
   border-radius: 20px;
   cursor: pointer;
   z-index: 1001;
-  user-select: none;
 }
 
 .start-game-btn {
@@ -78,7 +95,6 @@ video {
   letter-spacing: 1px;
   line-height: 25px;
   font-size: 20px;
-  user-select: none;
   z-index: 1001;
 }
 
@@ -111,8 +127,8 @@ video {
   padding: 10px 20px;
   text-align: center;
   font-size: 18px;
+  letter-spacing: 0;
   cursor: pointer;
-  user-select: none;
 }
 
 .time-line {
@@ -125,7 +141,7 @@ video {
   z-index: 1001;
 }
 
-.story {
+.story-or-the-end {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -133,17 +149,20 @@ video {
   font-size: 30px;
   text-align: center;
   letter-spacing: 2px;
-  user-select: none;
 }
 
-.click-icon {
-  width: 30px;
-  height: 30px;
+.try-again {
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  cursor: pointer;
 }
 
 @media screen and (orientation: portrait)
 {
-  .video-container {
+  .while-loading, .after-loading {
     display: none;
   }
 

@@ -9,32 +9,33 @@
 </head>
 
 <body>
-  <div class="while-loading">
+  <div class="while-loading" style="display: none;">
     <p class="click-to-fullscreen">
-      Клацніть<img src="/assets/icons/hand-point-up.svg" class="click-icon" />, щоб
-      збільшити на весь екран
+      Клацніть<img src="./assets/icons/hand-point-up.svg" class="icon" />, щоб збільшити на весь екран
     </p>
     <p class="loading">0%</p>
-    <p class="turn-sound-on">та включіть звук<span></span> на вашому пристрої</p>
+    <p class="turn-sound-on">
+      та включіть звук<img src="./assets/icons/volume-up.svg" class="icon" /> на вашому пристрої
+    </p>
   </div>
 
-  <div class="after-loading">
-    <figure class="video-container">
+  <figure class="video-container after-loading">
+    <div class="story-or-the-end">
       <p class="story"></p>
+      <p class="try-again">Заново<img src="./assets/icons/redo.svg" class="icon" /></p>
+    </div>
 
-      <p class="open-game-btn main-btn">Відкрити гру</p>
-      <p class="start-game-btn main-btn">Почати</p>
+    <p class="open-game-btn main-btn">Відкрити гру</p>
+    <p class="start-game-btn main-btn">Почати</p>
 
-      <div class="choices-container"></div>
-      <div class="time-line"></div>
+    <div class="choices-container"></div>
+    <div class="time-line"></div>
 
-      <div class="shadow"></div>
-    </figure>
-
-    <p class="portrait-mode">Будь ласка, переверніть екран</p>
-  </div>
+    <div class="shadow"></div>
+  </figure>
 
   <audio src="assets/music/Бодя офic.mp3" preload="metadata" loop></audio>
+  <p class="portrait-mode">Будь ласка, переверніть екран</p>
 
 
   <script src="config.js"></script>

@@ -22,7 +22,7 @@ const createVideoElement = (videoName, blob) => {
 }
 
 
-const loadVideo = (videoName, videoDataId) => {
+const loadVideo = (videoName, videoDataId, callback) => {
   const xhr = new XMLHttpRequest()
   const url = `${HOST}/assets/videos/${videoName}.mp4`
 
@@ -39,7 +39,7 @@ const loadVideo = (videoName, videoDataId) => {
     if (e.lengthComputable) {
       videosData[videoDataId].loaded = e.loaded / e.total * 100
 
-      updateLoading()
+      updateLoading(callback)
     }
   }
 
@@ -47,7 +47,7 @@ const loadVideo = (videoName, videoDataId) => {
 }
 
 
-const updateLoading = () => {
+const updateLoading = (callback) => {
   const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length
 
   avgLoading = average(videosData.map(videoData => videoData.loaded))
@@ -56,12 +56,13 @@ const updateLoading = () => {
   $('.loading').innerHTML = avgLoading + '%'
 
   if (avgLoading === '100.00') {
-    $('.loading').remove()
-    $('.after-loading').show()
+    callback()
   }
 }
 
 
-videosData.forEach((videoData, index) => {
-  loadVideo(videoData.name, index)
-});
+const startVideosLoading = (callback) => {
+  videosData.forEach((videoData, index) => {
+    loadVideo(videoData.name, index, callback)
+  })
+}

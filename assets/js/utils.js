@@ -2,9 +2,15 @@ const $ = (selector) => {
   element = document.querySelector(selector)
   elements = document.querySelectorAll(selector)
 
-  element.show = () => {
+  element.show = (approach) => {
     elements.forEach(el => {
-      el.style.display = 'inline'
+      el.style.display = approach ? approach : 'inline'
+    })
+  }
+
+  element.hide = () => {
+    elements.forEach(el => {
+      el.style.display = 'none'
     })
   }
 
@@ -100,10 +106,10 @@ const afterChoiceEvent = (choiceId) => {
     const delay = getShowChoiceDelay(videoId)
     const choices = getChoicesAfterVideo(videoId)
 
-    $('.story').insert(story)
+    if (story.isTheEnd) $('.try-again').show('flex')
+    $('.story').insert(story.text)
 
     if (delay) timer(delay)
-    console.log(choices)
     if (choices) generateChoices(choices)
   }
 }
